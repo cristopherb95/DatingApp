@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Dating App</a>
 
   <ul class="navbar-nav mr-auto">
@@ -17,7 +17,7 @@
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown">
-    <a class="dropdown-toggle text-light">Welcome User</a>
+    <a class="dropdown-toggle text-light">Welcome {{ authService.decodedToken['unique_name'] | titlecase }}</a>
 
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edit Profile</a>
