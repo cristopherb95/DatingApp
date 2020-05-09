@@ -2,21 +2,21 @@
 
 namespace DatingApp.API.Migrations
 {
-    public partial class AddedCity : Migration
+  public partial class AddedCity : Migration
+  {
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<string>(
-                name: "City",
-                table: "Users",
-                nullable: true);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "City",
-                table: "Users");
-        }
+      migrationBuilder.AddColumn<string>(
+          name: "City",
+          table: "Users",
+          nullable: true);
     }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+      migrationBuilder.DropColumn(
+          name: "City",
+          table: "Users");
+    }
+  }
 }

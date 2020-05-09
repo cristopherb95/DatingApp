@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm', {static : true}) editForm: NgForm;
+  @ViewChild('editForm', { static: true }) editForm: NgForm;
 
   user: User;
   // Prevens from browser tab closing while editing user data
