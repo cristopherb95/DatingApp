@@ -34,6 +34,7 @@ namespace DatingApp.API.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetValue(int id)
     {
+      throw new Exception("New errororor occured");
       var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
       return Ok(value);
     }

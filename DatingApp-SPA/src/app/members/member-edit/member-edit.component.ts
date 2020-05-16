@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -11,10 +11,10 @@ import { AuthService } from 'src/app/_services/auth.service';
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.css']
 })
-export class MemberEditComponent implements OnInit {
+export class MemberEditComponent implements OnInit, OnDestroy {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
-
   user: User;
+  photoUrl: string;
   // Prevens from browser tab closing while editing user data
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -32,6 +32,9 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+    this.authService.photoUrl.subscribe(url => {
+      this.photoUrl = url;
+    });
   }
 
   updateUser() {
@@ -42,5 +45,13 @@ export class MemberEditComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  updateMainPhoto(photoUrl: string) {
+    this.user.photoUrl = photoUrl;
+  }
+
+  ngOnDestroy() {
+    this.authService.photoUrl.unsubscribe();
   }
 }
