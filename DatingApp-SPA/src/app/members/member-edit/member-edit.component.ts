@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-member-edit',
@@ -15,6 +16,7 @@ export class MemberEditComponent implements OnInit, OnDestroy {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
   user: User;
   photoUrl: string;
+  photoUrlSubscription: Subscription;
   // Prevens from browser tab closing while editing user data
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -32,7 +34,7 @@ export class MemberEditComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
-    this.authService.photoUrl.subscribe(url => {
+    this.photoUrlSubscription = this.authService.photoUrl.subscribe(url => {
       this.photoUrl = url;
     });
   }
@@ -52,6 +54,6 @@ export class MemberEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authService.photoUrl.unsubscribe();
+    this.photoUrlSubscription.unsubscribe();
   }
 }

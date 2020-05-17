@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -11,11 +12,11 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit, OnDestroy {
   model: any = {};
   photoUrl: string;
-
+  photoUrlSubscription: Subscription;
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.photoUrl.subscribe(url => {
+    this.photoUrlSubscription = this.authService.photoUrl.subscribe(url => {
       this.photoUrl = url;
     });
   }
@@ -44,6 +45,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authService.photoUrl.unsubscribe();
+    this.photoUrlSubscription.unsubscribe();
   }
 }
