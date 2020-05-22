@@ -40,7 +40,7 @@ namespace DatingApp.API.Controllers
       }
 
       var users = await _repo.GetUsers(userParams);
-
+      
       var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
       // Add pagination header to HttpResponse
       Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);

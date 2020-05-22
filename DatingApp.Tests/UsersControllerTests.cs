@@ -59,10 +59,14 @@ namespace DatingApp.Tests
     [Fact]
     public void GetUsers_WhenCalled_ReturnsListOfUsers()
     {
-      var users = GetFakeUserList();
-      _usersRepository.Setup(repo => repo.GetUsers()).ReturnsAsync(users);
+      var userParams = new UserParams();
+      var user = GetFakeUserList().First(x => x.Id == 2);
+      var users = new PagedList<User>(GetFakeUserList().ToList(), 1, 1, 1);
 
-      var result = _controller.GetUsers().Result;
+      _usersRepository.Setup(repo => repo.GetUser(2)).ReturnsAsync(user);
+      _usersRepository.Setup(repo => repo.GetUsers(userParams)).ReturnsAsync(users);
+
+      var result = _controller.GetUsers(userParams).Result;
 
       var okResult = Assert.IsType<OkObjectResult>(result);
       var returnValue = Assert.IsType<List<UserForListDto>>(okResult.Value);
@@ -129,12 +133,14 @@ namespace DatingApp.Tests
         new User()
         {
             Id = 1,
-            Username = "Bob"
+            Username = "Bob",
+            Gender = "male"
         },
         new User()
         {
             Id = 2,
-            Username = "George"
+            Username = "George",
+            Gender = "male"
         }
       };
     }
