@@ -53,7 +53,7 @@ namespace DatingApp.Tests
 
       var okResult = Assert.IsType<OkObjectResult>(result);
       var returnValue = Assert.IsType<UserForDetailedDto>(okResult.Value);
-      Assert.Equal(user.Username, returnValue.Username);
+      Assert.Equal(user.UserName, returnValue.Username);
     }
 
     [Fact]
@@ -133,13 +133,13 @@ namespace DatingApp.Tests
         new User()
         {
             Id = 1,
-            Username = "Bob",
+            UserName = "Bob",
             Gender = "male"
         },
         new User()
         {
             Id = 2,
-            Username = "George",
+            UserName = "George",
             Gender = "male"
         }
       };
