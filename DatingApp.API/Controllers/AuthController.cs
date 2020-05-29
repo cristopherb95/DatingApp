@@ -25,8 +25,10 @@ namespace DatingApp.API.Controllers
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
-    public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+    private readonly IAuthRepository _authRepo;
+    public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAuthRepository authRepo)
     {
+      _authRepo = authRepo;
       _signInManager = signInManager;
       _userManager = userManager;
       _config = config;
@@ -53,7 +55,8 @@ namespace DatingApp.API.Controllers
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
     {
-      var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
+      // var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
+      var user = await _authRepo.GetUserByName(userForLoginDto.Username); // To load related photos
 
       var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
 

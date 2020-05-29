@@ -47,7 +47,7 @@ namespace DatingApp.Tests
     public void GetUser_WhenCalled_ReturnsRightUser()
     {
       var user = GetFakeUserList().SingleOrDefault(x => x.Id == 2);
-      _usersRepository.Setup(repo => repo.GetUser(2)).ReturnsAsync(user);
+      _usersRepository.Setup(repo => repo.GetUser(2, It.IsAny<bool>())).ReturnsAsync(user);
 
       var result = _controller.GetUser(2).Result;
 
@@ -63,7 +63,7 @@ namespace DatingApp.Tests
       var user = GetFakeUserList().First(x => x.Id == 2);
       var users = new PagedList<User>(GetFakeUserList().ToList(), 1, 1, 1);
 
-      _usersRepository.Setup(repo => repo.GetUser(2)).ReturnsAsync(user);
+      _usersRepository.Setup(repo => repo.GetUser(2, It.IsAny<bool>())).ReturnsAsync(user);
       _usersRepository.Setup(repo => repo.GetUsers(userParams)).ReturnsAsync(users);
 
       var result = _controller.GetUsers(userParams).Result;

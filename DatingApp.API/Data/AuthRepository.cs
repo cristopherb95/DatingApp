@@ -70,5 +70,10 @@ namespace DatingApp.API.Data
         return true;
       return false;
     }
+
+    public async Task<User> GetUserByName(string username) 
+    {
+      return await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.UserName.ToLower() == username.ToLower());
+    }
   }
 }
