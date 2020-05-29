@@ -62,7 +62,7 @@ namespace DatingApp.API.Controllers
         var userToReturn = _mapper.Map<UserForListDto>(user);
         return Ok(new
         {
-          token = generateJwtToken(user),
+          token = generateJwtToken(user).Result,
           user = userToReturn
         });
       }

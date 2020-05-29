@@ -15,7 +15,7 @@ export class AuthService {
   decodedToken: any;
   currentUser: User;
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
- // currentPhotoUrl = this.photoUrl.asObservable();
+  // currentPhotoUrl = this.photoUrl.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -47,4 +47,17 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
+
+  roleMatch(allowedRoles: string[]): boolean {
+    let isMatch = false;
+    const userRoles = this.decodedToken.role as string[];
+    allowedRoles.forEach(role => {
+      if (userRoles.includes(role)) {
+        isMatch = true;
+        return;
+      }
+    });
+    return isMatch;
+  }
+
 }
