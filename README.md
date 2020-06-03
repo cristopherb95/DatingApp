@@ -1,6 +1,8 @@
 # DatingApp
 Dating App made with .NET Core 3.0 Web API and Angular 8 front-end. It is full of functionality.
 
+<p align="center"><img src="https://user-images.githubusercontent.com/48388060/83612534-d1a7fb80-a582-11ea-985a-d96c7971294b.png" width="800" /></p>
+
 ## Back-end
 Made with .NET Core 3.0 and SQL Server database using Code First approach. SQLite is added for development purposes.
 * ### Photo upload
@@ -21,7 +23,7 @@ Application was done with JWT Authentication in mind. Backend is generating a to
 ## Front-end
 Front-end has been created with Angular version 8 and Bootstrap 4. Several components are using ngx-bootstrap. Notifications are provided by Alertify js.
 
-![dat1](https://user-images.githubusercontent.com/48388060/83611640-8b05d180-a581-11ea-9cb0-ce7993e732c7.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/48388060/83611640-8b05d180-a581-11ea-9cb0-ce7993e732c7.png" width="800" /></p>
 
 ## Tests
 Unit tests are provided for back-end using xUnit framework.
